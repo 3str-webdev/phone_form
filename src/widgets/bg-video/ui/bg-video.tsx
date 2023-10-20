@@ -2,7 +2,7 @@ import { UIPageLoader, UIVideoPlayer } from "@/shared/ui";
 import { useBgVideo } from "../model/use-bg-video";
 import { useVideoStore } from "@/shared/store/use-video-store";
 
-export function BgVideo({}) {
+export function BgVideo() {
   const { isLoading, videoRef, handleVideoLoadComplete } = useBgVideo();
 
   const setCurrentTime = useVideoStore((state) => state.setCurrentTime);
