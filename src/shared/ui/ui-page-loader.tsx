@@ -13,7 +13,7 @@ export function UIPageLoader({ className, ...props }: UIPageLoaderProps) {
         "w-full h-full flex items-center justify-center"
       )}
     >
-      <UILoader className="w-14 h-14 text-sky-400" />
+      <UILoader className="w-14 h-14 text-main-1" />
     </div>
   );
 }
