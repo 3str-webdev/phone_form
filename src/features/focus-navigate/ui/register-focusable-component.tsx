@@ -3,7 +3,7 @@ import { FocusableElementProps, registerFocusable } from "..";
 
 export type RegisterFocusableComponentProps<P> = FocusableElementProps & {
   component?: ComponentType<P>;
-  props: P;
+  props?: P;
   children?: ReactNode;
 };
 
