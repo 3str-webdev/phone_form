@@ -1,12 +1,15 @@
 import { useVideoStore } from "@/shared/store/use-video-store";
 import { UIPageLoader, UIVideoPlayer } from "@/shared/ui";
 import clsx from "clsx";
+import { useAutoPause } from "../model/use-auto-pause";
 import { useBgVideo } from "../model/use-bg-video";
 
 export function BgVideo() {
   const { isLoading, videoRef, handleVideoLoadComplete } = useBgVideo();
 
   const setCurrentTime = useVideoStore((state) => state.setCurrentTime);
+
+  useAutoPause();
 
   const videoCLassName = isLoading ? "hidden" : "";
 
