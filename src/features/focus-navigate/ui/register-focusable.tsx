@@ -38,9 +38,7 @@ export function registerFocusable<P extends HTMLAttributes<HTMLElement>>(
     useEffect(() => {
       if (!ref.current) return;
 
-      if (Number(ref.current.getAttribute("data-id")) !== elems[currentId]) {
-        return;
-      }
+      if (id !== elems[currentId]) return;
 
       ref.current.focus();
     }, [currentId, elems]);
