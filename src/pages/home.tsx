@@ -1,7 +1,5 @@
-import { Banner } from "@/entities/show-banner";
+import { Banner } from "@/entities/banner";
 import { useVideoStore } from "@/shared/store/use-video-store";
-import { VideoLayout } from "@/widgets/bg-video";
-import { BgVideo } from "@/widgets/bg-video/ui/bg-video";
 import { useEffect, useState } from "react";
 
 export function HomePage() {
@@ -15,11 +13,10 @@ export function HomePage() {
   }, [currentTime, isShowBanner]);
 
   return (
-    <VideoLayout>
-      <BgVideo />
+    <>
       {isShowBanner && (
         <Banner className="absolute top-[50%] right-0 translate-y-[-50%]" />
       )}
-    </VideoLayout>
+    </>
   );
 }
