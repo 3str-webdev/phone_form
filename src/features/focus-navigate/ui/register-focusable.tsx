@@ -43,8 +43,6 @@ export function registerFocusable<P extends HTMLAttributes<HTMLElement>>(
       }
 
       ref.current.focus();
-
-      console.log(currentId);
     }, [currentId, elems]);
 
     const handleClick = useCallback(
@@ -95,7 +93,6 @@ export function registerFocusable<P extends HTMLAttributes<HTMLElement>>(
             handleArrowKeydown("right");
             break;
         }
-        console.log(e.key, isEntered);
 
         if (e.key === ENTER && isEntered && ref.current) {
           ref.current.click();
