@@ -39,12 +39,9 @@ export function useEnterPhone() {
     };
   }, [onKeyDown]);
 
-  const isValidPhone = /^[0-9]{10}$]/.test(phone);
-
   return {
     phone,
     handleChangePhoneFromDisplayKeyboard,
     handleErasePhone,
-    isValidPhone,
   };
 }
