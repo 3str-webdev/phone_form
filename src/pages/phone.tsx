@@ -1,4 +1,3 @@
-import { validPhone } from "@/entities/phone_number";
 import {
   COUNTRY_CODE,
   Country,
@@ -16,7 +15,7 @@ import { CloseButton } from "@/widgets/close-button";
 import { CompletePhoneButton } from "@/widgets/complete-phone-button";
 import { InvalidPhoneMessage } from "@/widgets/invalid-phone-message";
 import { ProvePersonalData } from "@/widgets/prove-personal-data";
-import { useRouter } from "next/router";
+import { QrCodeInfo } from "@/widgets/qr-code-info";
 import { useState } from "react";
 
 const country: Country = "RU";
@@ -120,6 +119,7 @@ export function PhonePage() {
             Подтвердить номер
           </CompletePhoneButton>
         }
+        qrCodeInfo={<QrCodeInfo className="absolute right-10 bottom-10" />}
       />
     </>
   );

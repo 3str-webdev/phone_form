@@ -10,6 +10,7 @@ type PhoneLayoutProps = {
   keyboard: ReactNode;
   processingPersonalData: ReactNode;
   submitButton: ReactNode;
+  qrCodeInfo: ReactNode;
 };
 
 export function PhoneLayout({
@@ -18,6 +19,7 @@ export function PhoneLayout({
   keyboard,
   processingPersonalData,
   submitButton,
+  qrCodeInfo,
 }: PhoneLayoutProps) {
   return (
     <>
@@ -41,6 +43,8 @@ export function PhoneLayout({
           <div className="pt-[13px]">{submitButton}</div>
         </div>
       </aside>
+
+      {qrCodeInfo}
     </>
   );
 }

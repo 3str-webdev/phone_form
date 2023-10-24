@@ -2,9 +2,10 @@ import { ReactNode } from "react";
 
 type FinalLayoutProps = {
   closeButton: ReactNode;
+  qrCodeInfo: ReactNode;
 };
 
-export function FinalLayout({ closeButton }: FinalLayoutProps) {
+export function FinalLayout({ closeButton, qrCodeInfo }: FinalLayoutProps) {
   return (
     <>
       {closeButton}
@@ -19,6 +20,8 @@ export function FinalLayout({ closeButton }: FinalLayoutProps) {
           </p>
         </div>
       </aside>
+
+      {qrCodeInfo}
     </>
   );
 }
