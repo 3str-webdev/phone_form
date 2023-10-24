@@ -3,6 +3,8 @@ import clsx from "clsx";
 import Image from "next/image";
 import { HTMLAttributes } from "react";
 import homeSvg from "/public/home-qr.svg";
+import Link from "next/link";
+import { ROUTES } from "@/shared/constants/routes";
 
 type BannerProps = HTMLAttributes<HTMLElement>;
 
@@ -15,8 +17,8 @@ export function Banner({ className, ...props }: BannerProps) {
       )}
     >
       <h2 className="text-text max-w-[231px] text-center">
-        ИСПОЛНИТЕ МЕЧТУ ВАШЕГО МАЛЫША!
-        <br /> ПОДАРИТЕ ЕМУ СОБАКУ!
+        ИСПОЛНИТЕ МЕЧТУ ВАШЕГО ВАНДАМА!
+        <br /> ПОДАРИТЕ ЕМУ МАШИНУ!
       </h2>
 
       <div className="flex flex-col gap-5 max-w-[126px]">
@@ -26,7 +28,9 @@ export function Banner({ className, ...props }: BannerProps) {
         </p>
       </div>
 
-      <UIButton className="text-main-1 w-full max-w-[156px]">ОК</UIButton>
+      <Link className="w-full max-w-[156px]" href={ROUTES.PHONE}>
+        <UIButton className="text-main-1 w-full max-w-[156px]">ОК</UIButton>
+      </Link>
     </aside>
   );
 }
