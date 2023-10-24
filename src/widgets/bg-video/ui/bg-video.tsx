@@ -1,6 +1,7 @@
-import { UIPageLoader, UIVideoPlayer } from "@/shared/ui";
-import { useBgVideo } from "../model/use-bg-video";
 import { useVideoStore } from "@/shared/store/use-video-store";
+import { UIPageLoader, UIVideoPlayer } from "@/shared/ui";
+import clsx from "clsx";
+import { useBgVideo } from "../model/use-bg-video";
 
 export function BgVideo() {
   const { isLoading, videoRef, handleVideoLoadComplete } = useBgVideo();
@@ -20,7 +21,10 @@ export function BgVideo() {
       {isLoading && <UIPageLoader />}
 
       <UIVideoPlayer
-        className={videoCLassName}
+        className={clsx(
+          videoCLassName,
+          "absolute top-0 left-0 right-0 bottom-0"
+        )}
         src="/bg-video.mp4"
         autoPlay
         muted

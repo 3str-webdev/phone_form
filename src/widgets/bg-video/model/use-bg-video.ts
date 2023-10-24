@@ -1,7 +1,10 @@
+import { useVideoStore } from "@/shared/store/use-video-store";
 import { useEffect, useRef, useState } from "react";
 
 export function useBgVideo() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const isPlaying = useVideoStore((state) => state.isPlaying);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -22,6 +25,20 @@ export function useBgVideo() {
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (!(videoRef && videoRef.current)) {
+      return;
+    }
+
+    const video = videoRef.current;
+
+    if (isPlaying) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  }, [isPlaying]);
 
   return { isLoading, videoRef, handleVideoLoadComplete };
 }
