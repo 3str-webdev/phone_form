@@ -11,8 +11,6 @@ export function HomePage() {
 
   const isShowBanner = useShowHomeBannerStore((state) => state.isShowBanner);
 
-  console.log("Home render");
-
   useResetNavigate();
 
   return (
