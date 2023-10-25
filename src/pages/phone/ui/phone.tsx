@@ -1,3 +1,4 @@
+import { useDetectUserActivity } from "@/features/detect-user-activity";
 import {
   COUNTRY_CODE,
   Country,
@@ -41,10 +42,8 @@ export function PhonePage() {
     isProvedPersonalData
   );
 
-  const { startedAt } = useInactionTimerStartTime(Date.now(), [
-    phone,
-    isProvedPersonalData,
-  ]);
+  const { startedAt, refreshStartTime } = useInactionTimerStartTime(Date.now());
+  useDetectUserActivity(refreshStartTime);
 
   const handleInactionTimerFinish = () => {
     router.push(ROUTES.HOME);
