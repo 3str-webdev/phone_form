@@ -1,4 +1,7 @@
+import clsx from "clsx";
 import { ReactNode } from "react";
+
+import styles from "../animations/animations.module.css";
 
 type HomeLayoutProps = {
   qr: ReactNode;
@@ -12,7 +15,14 @@ export function HomeLayout({ qr, button, isShowBanner }: HomeLayoutProps) {
   }
 
   return (
-    <aside className="absolute top-[50%] right-0 pt-5 pb-[10px] px-[10px] flex flex-col items-center gap-5 -translate-y-[50%] bg-main-1">
+    <aside
+      className={clsx(
+        styles.home_banner_animate,
+        "top-[50%] -translate-y-[50%] absolute right-0",
+        "pt-5 pb-[10px] px-[10px]",
+        "flex flex-col items-center gap-5 bg-main-1"
+      )}
+    >
       <h1 className="text-text max-w-[231px] text-center uppercase">
         Исполните мечту вашего Вандама!
         <br /> Подарите ему машину!

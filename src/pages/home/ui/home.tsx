@@ -2,7 +2,7 @@ import { useResetNavigate } from "@/features/focus-navigate";
 import { useShowHomeBannerStore } from "@/features/show-home-banner";
 import { ROUTES } from "@/shared/constants/routes";
 import { QRCode } from "@/shared/ui/icons";
-import { HomeLayout } from "@/shared/ui/layouts/home-layout";
+import { HomeLayout } from "@/pages/home/ui/home-layout";
 import { HomeOkButton } from "@/widgets/home-ok-button";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";

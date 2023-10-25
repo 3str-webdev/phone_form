@@ -14,7 +14,7 @@ import {
   useInactionTimerStartTime,
 } from "@/features/inaction-timer";
 import { ROUTES } from "@/shared/constants/routes";
-import { PhoneLayout } from "@/shared/ui/layouts/phone-layout";
+import { PhoneLayout } from "@/pages/phone/ui/phone-layout";
 import { CloseButton } from "@/widgets/close-button";
 import { CompletePhoneButton } from "@/widgets/complete-phone-button";
 import { InvalidPhoneMessage } from "@/widgets/invalid-phone-message";

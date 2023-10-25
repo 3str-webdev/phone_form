@@ -1,0 +1,17 @@
+.phone_aside_animate {
+  animation-name: phone_aside;
+  animation-duration: var(--init-animate-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes phone_aside {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

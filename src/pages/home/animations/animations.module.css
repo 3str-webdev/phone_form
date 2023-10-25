@@ -1,0 +1,17 @@
+.home_banner_animate {
+  animation-name: home_banner;
+  animation-duration: var(--init-animate-duration);
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes home_banner {
+  0% {
+    transform: translateY(-50%) scale(0.6);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+  }
+}

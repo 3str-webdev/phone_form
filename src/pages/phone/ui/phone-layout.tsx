@@ -1,8 +1,7 @@
-import { ROUTES } from "@/shared/constants/routes";
-import Link from "next/link";
+import clsx from "clsx";
 import { ReactNode } from "react";
-import { UIButton } from "..";
-import { CrossIcon } from "../icons";
+
+import styles from "../animations/animations.module.css";
 
 type PhoneLayoutProps = {
   closeButton: ReactNode;
@@ -27,7 +26,12 @@ export function PhoneLayout({
     <>
       {closeButton}
 
-      <aside className="relative bg-main-1 h-full max-w-[380px] py-10 px-6">
+      <aside
+        className={clsx(
+          styles.phone_aside_animate,
+          "relative bg-main-1 h-full max-w-[380px] py-10 px-6"
+        )}
+      >
         <article className="absolute -right-1 top-0 px-2 py-2 translate-x-full bg-main-1">
           <div className="w-10 h-10">{inactionTimer}</div>
         </article>
