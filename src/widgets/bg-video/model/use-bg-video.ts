@@ -1,4 +1,4 @@
-import { useVideoStore } from "@/shared/store/use-video-store";
+import { useVideoStore } from "@/entities/video/use-video-store";
 import { useEffect, useRef, useState } from "react";
 
 export function useBgVideo() {

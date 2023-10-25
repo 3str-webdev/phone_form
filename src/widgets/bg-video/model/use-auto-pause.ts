@@ -1,5 +1,5 @@
 import { ROUTES } from "@/shared/constants/routes";
-import { useVideoStore } from "@/shared/store/use-video-store";
+import { useVideoStore } from "@/entities/video/use-video-store";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
