@@ -6,7 +6,7 @@ export const validPhone = async (
   country: Country
 ): Promise<boolean> => {
   try {
-    const url = "http://apilayer.net/api/validate";
+    const url = "/phone/validate";
     const response = await axios<{ valid: boolean }>(url, {
       params: {
         access_key: process.env.PHONE_VALIDATE_API_KEY,
