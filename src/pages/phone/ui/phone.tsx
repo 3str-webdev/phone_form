@@ -8,7 +8,7 @@ import {
   useValidPhone,
 } from "@/features/enter-phone-number";
 import { PhoneNumberPreview } from "@/features/enter-phone-number/ui/phone-number-preview";
-import { useResetNavigate } from "@/features/focus-navigate";
+import { useFocusableStore, useResetNavigate } from "@/features/focus-navigate";
 import {
   InactionTimer,
   useInactionTimerStartTime,
@@ -41,9 +41,11 @@ export function PhonePage() {
     isProvedPersonalData
   );
 
+  const currentId = useFocusableStore((state) => state.currentId);
   const { startedAt } = useInactionTimerStartTime(Date.now(), [
     phone,
     isProvedPersonalData,
+    currentId,
   ]);
 
   const handleInactionTimerFinish = () => {
