@@ -9,8 +9,10 @@ import {
   useRef,
 } from "react";
 import { useFocusableStore } from "../model/use-focusable-store";
+import { useFocusableElementHandlers } from "../model/use-focusable-element-handlers";
+import { useFocusObserve } from "../model/use-focus-observe";
 
-type VectorMoves = {
+export type VectorMoves = {
   up?: number;
   down?: number;
   left?: number;
@@ -32,91 +34,20 @@ export function registerFocusable<P extends HTMLAttributes<HTMLElement>>(
   const FocusableComponent = (props: P) => {
     const ref = useRef<HTMLElement | null>(null);
 
-    const { currentId, setCurrentId, elems, addElem, deleteElem } =
-      useFocusableStore();
+    const { handleClick, handleKeydown } = useFocusableElementHandlers({
+      ref,
+      props,
+      moves,
+      id,
+      isEntered,
+    });
 
-    useEffect(() => {
-      if (!ref.current) return;
-
-      if (id !== elems[currentId]) return;
-
-      ref.current.focus();
-    }, [currentId, elems]);
-
-    const handleClick = useCallback(
-      (e: MouseEvent) => {
-        if (props.onClick) {
-          props.onClick(e as unknown as ReactMouseEvent<HTMLElement>);
-        }
-
-        if (ref.current) {
-          ref.current.focus();
-          setCurrentId(id);
-        }
-      },
-      [props, setCurrentId]
-    );
-
-    const handleArrowKeydown = useCallback(
-      (vector: keyof VectorMoves) => {
-        const move = moves[vector];
-        if (move !== undefined) {
-          const minFocusedId = 0;
-          const maxFocusedId = elems.length - 1;
-          setCurrentId(
-            Math.max(minFocusedId, Math.min(maxFocusedId, currentId + move))
-          );
-        }
-      },
-      [currentId, elems.length, setCurrentId]
-    );
-
-    const handleKeydown = useCallback(
-      (e: KeyboardEvent) => {
-        if (props.onKeyDown) {
-          props.onKeyDown(e as unknown as ReactKeyboardEvent<HTMLElement>);
-        }
-
-        switch (e.key) {
-          case ARROW_KEYS.UP:
-            handleArrowKeydown("up");
-            break;
-          case ARROW_KEYS.DOWN:
-            handleArrowKeydown("down");
-            break;
-          case ARROW_KEYS.LEFT:
-            handleArrowKeydown("left");
-            break;
-          case ARROW_KEYS.RIGHT:
-            handleArrowKeydown("right");
-            break;
-        }
-
-        if (e.key === ENTER && isEntered && ref.current) {
-          ref.current.click();
-        }
-      },
-      [handleArrowKeydown, props]
-    );
-
-    useEffect(() => {
-      addElem(id);
-
-      const element = ref.current;
-
-      if (element) {
-        element.addEventListener("keydown", handleKeydown);
-        element.addEventListener("click", handleClick);
-      }
-
-      return () => {
-        deleteElem(id);
-        if (element) {
-          element.removeEventListener("keydown", handleKeydown);
-          element.removeEventListener("click", handleClick);
-        }
-      };
-    }, [addElem, deleteElem, handleClick, handleKeydown]);
+    useFocusObserve({
+      ref,
+      id,
+      handleClick,
+      handleKeydown,
+    });
 
     return <Component {...props} ref={ref} />;
   };
