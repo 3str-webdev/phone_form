@@ -5,11 +5,17 @@ import { QRCode } from "@/shared/ui/icons";
 import { HomeLayout } from "@/shared/ui/layouts/home-layout";
 import { HomeOkButton } from "@/widgets/home-ok-button";
 import { useRouter } from "next/router";
+import { MouseEvent } from "react";
 
 export function HomePage() {
   const router = useRouter();
 
   const isShowBanner = useShowHomeBannerStore((state) => state.isShowBanner);
+
+  const handleHomeOkButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    router.push(ROUTES.PHONE);
+  };
 
   useResetNavigate();
 
@@ -22,8 +28,9 @@ export function HomePage() {
           focusId={0}
           props={{
             className: "w-full",
-            onClick: () => router.push(ROUTES.PHONE),
+            onClick: handleHomeOkButtonClick,
           }}
+          entered={false}
         >
           ОК
         </HomeOkButton>

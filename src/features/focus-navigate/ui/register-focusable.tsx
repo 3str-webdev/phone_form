@@ -105,7 +105,6 @@ export function registerFocusable<P extends HTMLAttributes<HTMLElement>>(
       const element = ref.current;
 
       if (element) {
-        element.setAttribute("data-id", String(id));
         element.addEventListener("keydown", handleKeydown);
         element.addEventListener("click", handleClick);
       }
