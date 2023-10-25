@@ -9,6 +9,10 @@ import {
 } from "@/features/enter-phone-number";
 import { PhoneNumberPreview } from "@/features/enter-phone-number/ui/phone-number-preview";
 import { useResetNavigate } from "@/features/focus-navigate";
+import {
+  InactionTimer,
+  useInactionTimerStartTime,
+} from "@/features/inaction-timer";
 import { ROUTES } from "@/shared/constants/routes";
 import { PhoneLayout } from "@/shared/ui/layouts/phone-layout";
 import { CloseButton } from "@/widgets/close-button";
@@ -16,11 +20,13 @@ import { CompletePhoneButton } from "@/widgets/complete-phone-button";
 import { InvalidPhoneMessage } from "@/widgets/invalid-phone-message";
 import { ProvePersonalData } from "@/widgets/prove-personal-data";
 import { QrCodeInfo } from "@/widgets/qr-code-info";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 const country: Country = "RU";
 
 export function PhonePage() {
+  const router = useRouter();
   const { phone, handleChangePhoneFromDisplayKeyboard, handleErasePhone } =
     useEnterPhone();
 
@@ -34,6 +40,15 @@ export function PhonePage() {
     country,
     isProvedPersonalData
   );
+
+  const { startedAt } = useInactionTimerStartTime(Date.now(), [
+    phone,
+    isProvedPersonalData,
+  ]);
+
+  const handleInactionTimerFinish = () => {
+    router.push(ROUTES.HOME);
+  };
 
   const getSubInfoComponent = () => {
     if (isInvalid) {
@@ -118,6 +133,13 @@ export function PhonePage() {
           >
             Подтвердить номер
           </CompletePhoneButton>
+        }
+        inactionTimer={
+          <InactionTimer
+            startedAt={startedAt}
+            seconds={10}
+            onFinish={handleInactionTimerFinish}
+          />
         }
         qrCodeInfo={<QrCodeInfo className="absolute right-10 bottom-10" />}
       />
