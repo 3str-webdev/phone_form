@@ -36,7 +36,7 @@ export function CompletePhoneButton({
   props,
   ...otherProps
 }: RegisterFocusableComponentProps<CompletePhoneButtonProps>) {
-  if (props.disabled) {
+  if (props && props.disabled) {
     return <CompletePhoneButtonComponent {...props} {...otherProps} />;
   }
 
