@@ -1,9 +1,6 @@
-import { DependencyList, useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
-export function useInactionTimerStartTime(
-  initialTime: number,
-  observeValues: DependencyList = []
-) {
+export function useInactionTimerStartTime(initialTime: number) {
   const [startedAt, setStartedAt] = useState<number>(initialTime);
 
   const setStartTime = useCallback((newTimerValue: number) => {
@@ -13,12 +10,6 @@ export function useInactionTimerStartTime(
   const refreshStartTime = useCallback(() => {
     setStartedAt(Date.now());
   }, []);
-
-  // Добавляю отслеживание изменений переданных значений для обновления таймера
-  useEffect(() => {
-    refreshStartTime();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refreshStartTime, ...observeValues]);
 
   return {
     startedAt,

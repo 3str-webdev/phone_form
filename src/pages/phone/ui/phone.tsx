@@ -1,3 +1,4 @@
+import { useDetectUserActivity } from "@/features/detect-user-activity";
 import {
   COUNTRY_CODE,
   Country,
@@ -13,8 +14,8 @@ import {
   InactionTimer,
   useInactionTimerStartTime,
 } from "@/features/inaction-timer";
-import { ROUTES } from "@/shared/constants/routes";
 import { PhoneLayout } from "@/pages/phone/ui/phone-layout";
+import { ROUTES } from "@/shared/constants/routes";
 import { CloseButton } from "@/widgets/close-button";
 import { CompletePhoneButton } from "@/widgets/complete-phone-button";
 import { InvalidPhoneMessage } from "@/widgets/invalid-phone-message";
@@ -41,12 +42,8 @@ export function PhonePage() {
     isProvedPersonalData
   );
 
-  const currentId = useFocusableStore((state) => state.currentId);
-  const { startedAt } = useInactionTimerStartTime(Date.now(), [
-    phone,
-    isProvedPersonalData,
-    currentId,
-  ]);
+  const { startedAt, refreshStartTime } = useInactionTimerStartTime(Date.now());
+  useDetectUserActivity(refreshStartTime);
 
   const handleInactionTimerFinish = () => {
     router.push(ROUTES.HOME);
