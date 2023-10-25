@@ -1,4 +1,8 @@
-import { useVideoStore } from "@/shared/store/use-video-store";
+import { useVideoStore } from "@/entities/video/use-video-store";
+import {
+  useObserveVideoTime,
+  useShowHomeBannerStore,
+} from "@/features/show-home-banner";
 import { UIPageLoader, UIVideoPlayer } from "@/shared/ui";
 import clsx from "clsx";
 import { useAutoPause } from "../model/use-auto-pause";
@@ -8,7 +12,11 @@ export function BgVideo() {
   const { isLoading, videoRef, handleVideoLoadComplete } = useBgVideo();
 
   const setCurrentTime = useVideoStore((state) => state.setCurrentTime);
+  const setIsShowBanner = useShowHomeBannerStore(
+    (state) => state.setIsShowBanner
+  );
 
+  useObserveVideoTime(5, setIsShowBanner);
   useAutoPause();
 
   const videoCLassName = isLoading ? "hidden" : "";

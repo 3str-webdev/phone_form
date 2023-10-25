@@ -1,23 +1,17 @@
 import { useResetNavigate } from "@/features/focus-navigate";
+import { useShowHomeBannerStore } from "@/features/show-home-banner";
 import { ROUTES } from "@/shared/constants/routes";
-import { useVideoStore } from "@/shared/store/use-video-store";
 import { QRCode } from "@/shared/ui/icons";
 import { HomeLayout } from "@/shared/ui/layouts/home-layout";
 import { HomeOkButton } from "@/widgets/home-ok-button";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 export function HomePage() {
-  const [isShowBanner, setIsShowBanner] = useState<boolean>(false);
   const router = useRouter();
 
-  const currentTime = useVideoStore((state) => state.currentTime);
+  const isShowBanner = useShowHomeBannerStore((state) => state.isShowBanner);
 
-  useEffect(() => {
-    if (currentTime >= 5) {
-      setIsShowBanner(true);
-    }
-  }, [currentTime]);
+  console.log("Home render");
 
   useResetNavigate();
 
