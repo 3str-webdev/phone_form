@@ -14,7 +14,6 @@ export function UICheckbox({
 }: UICheckboxProps) {
   const handleChange = () => {
     onChange(!checked);
-    console.log("check");
   };
 
   return (
