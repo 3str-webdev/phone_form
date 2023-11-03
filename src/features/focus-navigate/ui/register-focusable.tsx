@@ -1,16 +1,7 @@
-import { ARROW_KEYS, ENTER } from "@/shared/constants/keys";
-import {
-  ComponentType,
-  HTMLAttributes,
-  KeyboardEvent as ReactKeyboardEvent,
-  MouseEvent as ReactMouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
-import { useFocusableStore } from "../model/use-focusable-store";
-import { useFocusableElementHandlers } from "../model/use-focusable-element-handlers";
+import { ComponentType, HTMLAttributes, useRef } from "react";
+import { MOVES } from "../constants";
 import { useFocusObserve } from "../model/use-focus-observe";
+import { useFocusableElementHandlers } from "../model/use-focusable-element-handlers";
 
 export type VectorMoves = {
   up?: number;
@@ -27,8 +18,8 @@ export type FocusableElementProps = {
 
 export function registerFocusable<P extends HTMLAttributes<HTMLElement>>(
   Component: ComponentType<P>,
-  id: number,
-  moves: VectorMoves = { left: -1, right: 1, up: 0, down: 0 },
+  focusId: number,
+  moves: VectorMoves = MOVES.DEFAULT,
   isEntered = false
 ) {
   const FocusableComponent = (props: P) => {
@@ -38,13 +29,13 @@ export function registerFocusable<P extends HTMLAttributes<HTMLElement>>(
       ref,
       props,
       moves,
-      id,
+      focusId: focusId,
       isEntered,
     });
 
     useFocusObserve({
       ref,
-      id,
+      focusId: focusId,
       handleClick,
       handleKeydown,
     });
