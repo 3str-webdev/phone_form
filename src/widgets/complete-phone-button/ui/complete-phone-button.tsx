@@ -33,20 +33,18 @@ export function CompletePhoneButton({
   focusId,
   component = CompletePhoneButtonComponent,
   moves,
-  props,
   ...otherProps
 }: RegisterFocusableComponentProps<CompletePhoneButtonProps>) {
-  if (props && props.disabled) {
-    return <CompletePhoneButtonComponent {...props} {...otherProps} />;
+  if (otherProps.disabled) {
+    return <CompletePhoneButtonComponent {...otherProps} />;
   }
 
   return (
     <RegisterFocusableComponent
-      {...otherProps}
       component={component}
       focusId={focusId}
       moves={moves}
-      props={props}
+      {...otherProps}
     />
   );
 }

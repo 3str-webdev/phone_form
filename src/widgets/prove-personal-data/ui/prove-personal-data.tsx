@@ -31,19 +31,8 @@ export const ProvePersonalDataComponent = forwardRef<
 });
 
 export function ProvePersonalData({
-  focusId,
   component = ProvePersonalDataComponent,
-  moves,
-  props,
   ...otherProps
 }: RegisterFocusableComponentProps<ProvePersonalDataProps>) {
-  return (
-    <RegisterFocusableComponent
-      {...otherProps}
-      component={component}
-      focusId={focusId}
-      moves={moves}
-      props={props}
-    />
-  );
+  return <RegisterFocusableComponent component={component} {...otherProps} />;
 }

@@ -42,17 +42,8 @@ const CloseButtonComponent = forwardRef<HTMLButtonElement, CloseButtonProps>(
 );
 
 export function CloseButton({
-  focusId,
   component = CloseButtonComponent,
-  moves,
-  props,
+  ...otherProps
 }: RegisterFocusableComponentProps<CloseButtonProps>) {
-  return (
-    <RegisterFocusableComponent
-      component={component}
-      focusId={focusId}
-      moves={moves}
-      props={props}
-    />
-  );
+  return <RegisterFocusableComponent component={component} {...otherProps} />;
 }

@@ -48,19 +48,8 @@ const KeyboardKeyComponent = forwardRef<HTMLButtonElement, KeyboardKeyProps>(
 );
 
 export function KeyboardKey({
-  focusId,
   component = KeyboardKeyComponent,
-  moves,
-  props,
   ...otherProps
 }: RegisterFocusableComponentProps<KeyboardKeyProps>) {
-  return (
-    <RegisterFocusableComponent
-      {...otherProps}
-      component={component}
-      focusId={focusId}
-      moves={moves}
-      props={props}
-    />
-  );
+  return <RegisterFocusableComponent {...otherProps} component={component} />;
 }

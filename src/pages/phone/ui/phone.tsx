@@ -9,7 +9,7 @@ import {
   useValidPhone,
 } from "@/features/enter-phone-number";
 import { PhoneNumberPreview } from "@/features/enter-phone-number/ui/phone-number-preview";
-import { useFocusableStore, useResetNavigate } from "@/features/focus-navigate";
+import { useResetNavigate } from "@/features/focus-navigate";
 import {
   InactionTimer,
   useInactionTimerStartTime,
@@ -56,12 +56,9 @@ export function PhonePage() {
 
     return (
       <ProvePersonalData
+        checked={isProvedPersonalData}
+        onChange={(isChecked) => setIsProvedPersonalData(Boolean(isChecked))}
         focusId={11}
-        props={{
-          checked: isProvedPersonalData,
-          onChange: (isChecked) =>
-            setIsProvedPersonalData(isChecked as boolean),
-        }}
         moves={{ up: -1, down: 1, left: -1, right: 2 }}
         entered
       >
@@ -77,7 +74,7 @@ export function PhonePage() {
       <PhoneLayout
         closeButton={
           <CloseButton
-            props={{ href: ROUTES.HOME }}
+            href={ROUTES.HOME}
             focusId={13}
             moves={{
               left: -1,
@@ -104,12 +101,10 @@ export function PhonePage() {
                   return (
                     <KeyboardKey
                       key={`keyboard_key_${i}`}
+                      keyObject={key}
+                      onClick={onClick}
                       focusId={key.focusId}
                       moves={key.moves}
-                      props={{
-                        keyObject: key,
-                        onClick,
-                      }}
                     >
                       <p>{key.label}</p>
                     </KeyboardKey>
@@ -122,13 +117,11 @@ export function PhonePage() {
         processingPersonalData={getSubInfoComponent()}
         submitButton={
           <CompletePhoneButton
+            onClick={handleCompletePhoneClick}
+            disabled={isDisabledSubmitButton}
+            isLoading={isLoading}
             focusId={12}
             moves={{ left: -1, right: 1, up: -1, down: 1 }}
-            props={{
-              disabled: isDisabledSubmitButton,
-              onClick: handleCompletePhoneClick,
-              isLoading,
-            }}
           >
             Подтвердить номер
           </CompletePhoneButton>
