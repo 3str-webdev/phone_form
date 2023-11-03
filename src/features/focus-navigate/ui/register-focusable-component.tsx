@@ -1,11 +1,10 @@
-import { ComponentType, HTMLAttributes, ReactNode } from "react";
+import { ComponentType, HTMLAttributes } from "react";
 import { FocusableElementProps, registerFocusable } from "..";
 
 export type RegisterFocusableComponentProps<P> = FocusableElementProps & {
   component?: ComponentType<P>;
-  props?: P;
-  children?: ReactNode;
-};
+  focusId: number;
+} & P;
 
 export function RegisterFocusableComponent<
   P extends HTMLAttributes<HTMLElement>
@@ -13,13 +12,10 @@ export function RegisterFocusableComponent<
   component,
   focusId,
   moves,
-  children,
-  props = {} as P,
   entered,
+  ...otherProps
 }: RegisterFocusableComponentProps<P>) {
   if (!component) return null;
-
-  props.children = children;
 
   const FocusableComponent = registerFocusable<P>(
     component,
@@ -27,6 +23,8 @@ export function RegisterFocusableComponent<
     moves,
     entered
   );
+
+  const props: P = otherProps as unknown as P;
 
   return <FocusableComponent {...props} />;
 }
