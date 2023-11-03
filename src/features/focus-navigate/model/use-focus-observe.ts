@@ -3,29 +3,29 @@ import { useFocusableStore } from "./use-focusable-store";
 
 type UseFocusObserve = {
   ref: MutableRefObject<HTMLElement | null>;
-  id: number;
+  focusId: number;
   handleClick: (e: MouseEvent) => void;
   handleKeydown: (e: KeyboardEvent) => void;
 };
 
 export function useFocusObserve({
   ref,
-  id,
+  focusId,
   handleClick,
   handleKeydown,
 }: UseFocusObserve) {
-  const { currentId, elems, addElem, deleteElem } = useFocusableStore();
+  const { currentIndex, elems, addElem, deleteElem } = useFocusableStore();
 
   useEffect(() => {
     if (!ref.current) return;
 
-    if (id !== elems[currentId]) return;
+    if (focusId !== elems[currentIndex]) return;
 
     ref.current.focus();
-  }, [currentId, elems, id, ref]);
+  }, [currentIndex, elems, focusId, ref]);
 
   useEffect(() => {
-    addElem(id);
+    addElem(focusId);
 
     const element = ref.current;
 
@@ -35,11 +35,11 @@ export function useFocusObserve({
     }
 
     return () => {
-      deleteElem(id);
+      deleteElem(focusId);
       if (element) {
         element.removeEventListener("keydown", handleKeydown);
         element.removeEventListener("click", handleClick);
       }
     };
-  }, [addElem, deleteElem, handleClick, handleKeydown, id, ref]);
+  }, [addElem, deleteElem, handleClick, handleKeydown, focusId, ref]);
 }

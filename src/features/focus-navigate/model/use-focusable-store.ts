@@ -3,7 +3,7 @@ import { create } from "zustand";
 type Elem = number;
 
 type UseFocusableStore = {
-  currentId: number;
+  currentIndex: number;
   setCurrentId: (id: number) => void;
 
   elems: Elem[];
@@ -12,8 +12,8 @@ type UseFocusableStore = {
 };
 
 export const useFocusableStore = create<UseFocusableStore>((set, get) => ({
-  currentId: 0,
-  setCurrentId: (id) => set({ currentId: id }),
+  currentIndex: 0,
+  setCurrentId: (id) => set({ currentIndex: id }),
 
   elems: [],
   addElem: (value) => {

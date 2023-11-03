@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useFocusableStore } from "..";
+import { useFocusableStore } from "./use-focusable-store";
 
 export function useResetNavigate() {
   const setCurrentId = useFocusableStore((state) => state.setCurrentId);

@@ -6,11 +6,11 @@ import {
   MouseEvent as ReactMouseEvent,
   useCallback,
 } from "react";
-import { useFocusableStore } from "..";
+import { useFocusableStore } from "./use-focusable-store";
 import { VectorMoves } from "../ui/register-focusable";
 
 type UseFocusableElementHandlers<P> = {
-  id: number;
+  focusId: number;
   props: P;
   moves: VectorMoves;
   ref: MutableRefObject<HTMLElement | null>;
@@ -19,8 +19,8 @@ type UseFocusableElementHandlers<P> = {
 
 export function useFocusableElementHandlers<
   P extends HTMLAttributes<HTMLElement>
->({ id, props, moves, ref, isEntered }: UseFocusableElementHandlers<P>) {
-  const { currentId, setCurrentId, elems } = useFocusableStore();
+>({ focusId, props, moves, ref, isEntered }: UseFocusableElementHandlers<P>) {
+  const { currentIndex, setCurrentId, elems } = useFocusableStore();
 
   const handleClick = useCallback(
     (e: MouseEvent) => {
@@ -30,24 +30,27 @@ export function useFocusableElementHandlers<
 
       if (ref.current) {
         ref.current.focus();
-        setCurrentId(id);
+        setCurrentId(focusId);
       }
     },
-    [id, props, ref, setCurrentId]
+    [focusId, props, ref, setCurrentId]
   );
 
   const handleArrowKeydown = useCallback(
     (vector: keyof VectorMoves) => {
       const move = moves[vector];
       if (move !== undefined) {
-        const minFocusedId = 0;
-        const maxFocusedId = elems.length - 1;
+        const minFocusedIndex = 0;
+        const maxFocusedIndex = elems.length - 1;
         setCurrentId(
-          Math.max(minFocusedId, Math.min(maxFocusedId, currentId + move))
+          Math.max(
+            minFocusedIndex,
+            Math.min(maxFocusedIndex, currentIndex + move)
+          )
         );
       }
     },
-    [currentId, elems.length, moves, setCurrentId]
+    [currentIndex, elems.length, moves, setCurrentId]
   );
 
   const handleKeydown = useCallback(
